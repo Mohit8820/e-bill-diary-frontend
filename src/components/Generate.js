@@ -13,7 +13,7 @@ const Generate = () => {
 
   const location = useLocation();
   const user = location.state;
-
+  console.log(user.userId);
   const [currentReading, setCurrentReading] = useState(user.lastBill.Reading);
   const handleChange = (event) => {
     setCurrentReading(event.target.value);
@@ -25,7 +25,7 @@ const Generate = () => {
     if (auth.isLoggedIn) {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_API_URL}/users/new/${auth.userId}`,
+          `${process.env.REACT_APP_API_URL}/users/new/${user.userId}`,
           "PATCH",
           JSON.stringify({
             currentReading: currentReading,
@@ -38,6 +38,7 @@ const Generate = () => {
         console.log(responseData);
         navigate("/bill", {
           state: {
+            userId: user.userId,
             name: user.name,
             lastBill: responseData.newBill,
             prevReading: user.lastBill.Reading,

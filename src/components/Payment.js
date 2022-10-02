@@ -73,6 +73,7 @@ const Payment = () => {
             `${process.env.REACT_APP_API_URL}/users/update/${user.lastBill.id}`,
             "PATCH",
             JSON.stringify({
+              userId: user.userId,
               status: "Processing",
             }),
             {

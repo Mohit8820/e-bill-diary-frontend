@@ -8,7 +8,9 @@ const Thanks = () => {
   const navigate = useNavigate();
   const goHome = async () => {
     if (auth.userId === null) navigate("/");
-    else navigate("/home", { state: auth.userId });
+    else if (auth.userId === process.env.REACT_APP_ADMIN_ID) {
+      navigate("/adminHome");
+    } else navigate("/home", { state: auth.userId });
   };
 
   return (

@@ -35,6 +35,7 @@ const Home = () => {
     else prevReading = user.history[user.history.length - 2].Reading;
     navigate(lastBill.Status === "Paid" ? "/generate" : "/bill", {
       state: {
+        userId: user.id,
         name: user.name,
         lastBill: lastBill,
         prevReading: prevReading,

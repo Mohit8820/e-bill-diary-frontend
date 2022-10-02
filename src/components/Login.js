@@ -87,7 +87,7 @@ const Login = () => {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-          {/* <input type="datetime-local" value="2017-06-13T13:00" /> */}
+
           <button className="w-100 btn btn-lg btn-primary" type="submit">
             Sign in
           </button>

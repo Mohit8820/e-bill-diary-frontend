@@ -100,4 +100,16 @@ form {
 }
 .user-element {
   display: flex;
+  gap: 0.2rem;
+  justify-content: space-between;
+}
+.user-element .btn-light {
+  width: 100%;
+}
+.card .table {
+  margin-bottom: 0;
+}
+.card .btn {
+  padding: 0.2rem;
+  align-self: stretch;
 }

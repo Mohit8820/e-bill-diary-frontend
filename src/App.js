@@ -1,4 +1,4 @@
-import React, { useContext, Suspense } from "react";
+import React from "react";
 
 import {
   BrowserRouter as Router,
@@ -47,7 +47,6 @@ function App() {
             <Route path="/bill" element={<Bill />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/thanks" element={<Thanks />} />
-
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>
         </div>

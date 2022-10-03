@@ -132,7 +132,7 @@ const Payment = () => {
             <input
               type="hidden"
               name="_next"
-              value="http://localhost:3000/thanks"
+              value="https://e-bill-diary.herokuapp.com/thanks"
             />
             <div className="dis-none">
               <div>
@@ -181,7 +181,7 @@ const Payment = () => {
                 />
               </div>
               <div className="input-group  mb-3">
-                <span class="input-group-text">Note (optional)</span>
+                <span className="input-group-text">Note (optional)</span>
                 <textarea
                   className="form-control"
                   aria-label="With textarea"

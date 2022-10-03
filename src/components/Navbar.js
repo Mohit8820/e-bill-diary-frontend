@@ -11,7 +11,7 @@ const Navbar = () => {
       {auth.isLoggedIn ? (
         <nav>
           <button
-            class="btn btn-outline-success me-2"
+            className="btn btn-outline-success me-2"
             type="button"
             onClick={() => {
               if (auth.userId === null) navigate("/");
@@ -23,7 +23,7 @@ const Navbar = () => {
             Home
           </button>
           <button
-            class="btn btn-primary "
+            className="btn btn-primary "
             type="button"
             onClick={() => {
               auth.logout();
@@ -36,7 +36,7 @@ const Navbar = () => {
       ) : (
         <nav>
           <button
-            class="btn btn-primary"
+            className="btn btn-primary"
             type="button"
             onClick={() => {
               navigate("/");

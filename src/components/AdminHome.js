@@ -191,15 +191,15 @@ const AdminHome = () => {
               </button>
             </div>
           </form>
-          <div class="card">
-            <h5 class="card-header">Users</h5>
-            <ul class="list-group list-group-flush">
+          <div className="card">
+            <h5 className="card-header">Users</h5>
+            <ul className="list-group list-group-flush">
               {users.map((user, index) => (
                 <React.Fragment key={index}>
-                  <li class="list-group-item user-element">
+                  <li className="list-group-item user-element">
                     <button
                       type="button"
-                      class="btn btn-light"
+                      className="btn btn-light"
                       onClick={() => goToHome(user.id)}
                     >
                       <div className="user-element">
@@ -209,7 +209,7 @@ const AdminHome = () => {
                           width="16"
                           height="16"
                           fill="currentColor"
-                          class="bi bi-box-arrow-up-right"
+                          className="bi bi-box-arrow-up-right"
                           viewBox="0 0 16 16"
                         >
                           <path
@@ -253,7 +253,7 @@ const AdminHome = () => {
                     </button>
                     <button
                       type="button"
-                      class="btn btn-warning"
+                      className="btn btn-warning"
                       onClick={() => {
                         setUpdatedUser((prev) => {
                           return { userId: user.id, name: "", password: "" };
@@ -273,8 +273,8 @@ const AdminHome = () => {
     );
   else
     return (
-      <div class="spinner-grow text-danger" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div className="spinner-grow text-danger" role="status">
+        <span className="visually-hidden">Loading...</span>
       </div>
     );
 };

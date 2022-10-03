@@ -105,7 +105,7 @@ const Home = () => {
           </button>
           <button
             type="button"
-            class="btn btn-info"
+            className="btn btn-info"
             onClick={() => {
               navigate("/chart", { state: user });
             }}

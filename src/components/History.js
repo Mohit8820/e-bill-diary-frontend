@@ -155,7 +155,7 @@ const History = () => {
           </div>
         )}
         <div className="input-group  mb-3">
-          <span class="input-group-text">
+          <span className="input-group-text">
             Note <br />
             (optional)
           </span>
@@ -221,7 +221,7 @@ const History = () => {
                       {auth.userId === process.env.REACT_APP_ADMIN_ID && (
                         <div className="btn-group col4">
                           <button
-                            class="btn update-btn"
+                            className="btn update-btn"
                             type="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
@@ -240,7 +240,7 @@ const History = () => {
                               width="16"
                               height="16"
                               fill="currentColor"
-                              class="bi bi-caret-down-fill"
+                              className="bi bi-caret-down-fill"
                               viewBox="0 0 16 16"
                             >
                               <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
@@ -250,12 +250,12 @@ const History = () => {
                               <span>{styledDate(bill.datePaid)}</span>
                             )}
                           </button>
-                          <ul class="dropdown-menu">
+                          <ul className="dropdown-menu">
                             <li>
                               {" "}
                               <button
                                 type="button"
-                                class="btn btn-danger"
+                                className="btn btn-danger"
                                 onClick={() => {
                                   setUpdateModal(true);
                                   setStatusBody({
@@ -270,7 +270,7 @@ const History = () => {
                             </li>
                             <li>
                               <button
-                                class="btn btn-warning"
+                                className="btn btn-warning"
                                 onClick={() => {
                                   setUpdateModal(true);
                                   setStatusBody({
@@ -285,7 +285,7 @@ const History = () => {
                             </li>
                             <li>
                               <button
-                                class="btn btn-success"
+                                className="btn btn-success"
                                 onClick={() => {
                                   setUpdateModal(true);
                                   setStatusBody({
@@ -324,7 +324,7 @@ const History = () => {
                             width="16"
                             height="16"
                             fill="currentColor"
-                            class="bi bi-trash-fill"
+                            className="bi bi-trash-fill"
                             viewBox="0 0 16 16"
                           >
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />

@@ -115,8 +115,8 @@ const Current = () => {
     );
   else
     return (
-      <div class="spinner-grow text-danger" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div className="spinner-grow text-danger" role="status">
+        <span className="visually-hidden">Loading...</span>
       </div>
     );
 };

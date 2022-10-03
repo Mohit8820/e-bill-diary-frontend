@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { styledDate } from "../assets/styledDate";
 import { AuthContext } from "../contexts/auth-context";
 import { useHttpClient } from "../hooks/http-hook";
+import Modal from "./UIElements/Modal";
 import ErrorModal from "../components/UIElements/ErrorModal";
 import LoadingSpinner from "../components/UIElements/LoadingSpinner";
 
 const AdminHome = () => {
   const auth = useContext(AuthContext);
+  const [success, setSuccess] = useState(false);
 
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ const AdminHome = () => {
       } catch (err) {}
     };
     getUsers();
-  }, [sendRequest]);
+  }, [sendRequest, success]);
   const updatePrice = async (event) => {
     event.preventDefault();
     if (auth.isLoggedIn) {
@@ -60,12 +62,114 @@ const AdminHome = () => {
     navigate("/home", { state: userId });
   };
 
+  const [updateModal, setUpdateModal] = useState(false);
+  const [updatedUser, setUpdatedUser] = useState({
+    userId: null,
+    name: "",
+    password: "",
+  });
+
+  const updateUser = async (event) => {
+    event.preventDefault();
+
+    if (updatedUser.name !== "" || updatedUser.password !== "") {
+      var ubody = {};
+      if (updatedUser.name === "")
+        ubody = {
+          password: updatedUser.password,
+        };
+      else if (updatedUser.password === "")
+        ubody = {
+          name: updatedUser.name,
+        };
+      console.log("ubody");
+      console.log(ubody);
+      try {
+        await sendRequest(
+          `${process.env.REACT_APP_API_URL}/users/updateUser/${updatedUser.userId}`,
+          "PATCH",
+          JSON.stringify(ubody),
+          {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + auth.token,
+          }
+        );
+        setSuccess(!success);
+        setUpdateModal(false);
+      } catch (err) {}
+    }
+  };
+  console.log(updatedUser);
   return (
     <React.Fragment>
+      <Modal
+        onCancel={() => setUpdateModal(false)}
+        show={updateModal}
+        header="Update User"
+        footer={
+          <div className="btn-flex">
+            <button
+              onClick={() => setUpdateModal(false)}
+              className="btn btn-secondary"
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+        }
+      >
+        <div className="input-group mb-3">
+          <span className="input-group-text">Name</span>
+          <input
+            type="text"
+            className="form-control"
+            id="inputGroupFile02"
+            value={updatedUser.name}
+            onChange={(event) => {
+              setUpdatedUser((prev) => {
+                return { ...prev, password: "", name: event.target.value };
+              });
+            }}
+          />
+          <button
+            type="button"
+            className="btn btn-primary"
+            id="button-addon2"
+            onClick={updateUser}
+            disabled={updatedUser.name === "" ? true : false}
+          >
+            Update
+          </button>
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text">Password</span>
+          <input
+            type="text"
+            className="form-control"
+            id="inputGroupFile02"
+            value={updatedUser.password}
+            onChange={(event) => {
+              setUpdatedUser((prev) => {
+                return { ...prev, name: "", password: event.target.value };
+              });
+            }}
+          />
+          <button
+            type="button"
+            className="btn btn-primary"
+            id="button-addon2"
+            onClick={updateUser}
+            disabled={updatedUser.password === "" ? true : false}
+          >
+            Update
+          </button>
+        </div>
+      </Modal>
       <ErrorModal error={error} onClear={clearError} />
-      <div>
+      <div className="home">
+        <span className="my-badge">Hello Sir</span>
+        {isLoading && <LoadingSpinner asOverlay />}
         <form onSubmit={updatePrice}>
-          {isLoading && <LoadingSpinner asOverlay />}
           <div className="input-group mb-3">
             <span className="input-group-text">Price</span>
             <input
@@ -145,7 +249,16 @@ const AdminHome = () => {
                       </tbody>
                     </table>
                   </button>
-                  <button type="button" class="btn btn-warning">
+                  <button
+                    type="button"
+                    class="btn btn-warning"
+                    onClick={() => {
+                      setUpdatedUser((prev) => {
+                        return { userId: user.id, name: "", password: "" };
+                      });
+                      setUpdateModal(true);
+                    }}
+                  >
                     Update
                   </button>
                 </li>

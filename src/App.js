@@ -1,3 +1,5 @@
+import React, { useContext, Suspense } from "react";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,9 +11,11 @@ import { AuthContext } from "./contexts/auth-context";
 
 import "./App.css";
 import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 import AdminHome from "./components/AdminHome";
 import Home from "./components/Home";
 import History from "./components/History";
+import Chart from "./components/Chart";
 import Generate from "./components/Generate";
 import Bill from "./components/Bill";
 import Payment from "./components/Payment";
@@ -32,11 +36,13 @@ function App() {
     >
       <Router>
         <div className="App text-center">
+          <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/adminHome" element={<AdminHome />} />
             <Route path="/home" element={<Home />} />
             <Route path="/history" element={<History />} />
+            <Route path="/chart" element={<Chart />} />
             <Route path="/generate" element={<Generate />} />
             <Route path="/bill" element={<Bill />} />
             <Route path="/payment" element={<Payment />} />

@@ -32,7 +32,7 @@ const Current = () => {
       }
     };
     generateQR();
-  }, []);
+  }, [location.state]);
 
   return (
     <div className="generate">
@@ -72,12 +72,13 @@ const Current = () => {
               <th scope="row">Bill Status</th>
               <td className={user.lastBill.Status}>{user.lastBill.Status}</td>
             </tr>
-            {user.lastBill.datePaid !== null && (
-              <tr>
-                <th scope="row">Bill Paid on</th>
-                <td>{user.lastBill.datePaid}</td>
-              </tr>
-            )}
+            {user.lastBill.datePaid !== null &&
+              user.lastBill.Status === "Paid" && (
+                <tr>
+                  <th scope="row">Bill Paid on</th>
+                  <td>{styledDate(user.lastBill.datePaid)}</td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

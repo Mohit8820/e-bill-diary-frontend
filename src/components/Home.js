@@ -103,6 +103,15 @@ const Home = () => {
           >
             Payment History
           </button>
+          <button
+            type="button"
+            class="btn btn-info"
+            onClick={() => {
+              navigate("/chart", { state: user });
+            }}
+          >
+            Bill Analysis
+          </button>
         </div>
       )}
     </React.Fragment>

@@ -10,7 +10,7 @@ const ErrorModal = (props) => {
       header="An Error Occurred!"
       show={!!props.error}
       footer={
-        <button onClick={props.onClear} className="filled-btn">
+        <button onClick={props.onClear} className="btn btn-primary">
           Okay
         </button>
       }

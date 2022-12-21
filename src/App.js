@@ -24,6 +24,30 @@ import Thanks from "./components/Thanks";
 function App() {
   const { token, login, logout, userId } = useAuth();
 
+  let routes;
+  if (token) {
+    routes = (
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/adminHome" element={<AdminHome />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/chart" element={<Chart />} />
+        <Route path="/generate" element={<Generate />} />
+        <Route path="/bill" element={<Bill />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/thanks" element={<Thanks />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
+    );
+  } else {
+    routes = (
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
+    );
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -35,20 +59,11 @@ function App() {
       }}
     >
       <Router>
-        <div className="App text-center">
+        <div className="App">
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/adminHome" element={<AdminHome />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/chart" element={<Chart />} />
-            <Route path="/generate" element={<Generate />} />
-            <Route path="/bill" element={<Bill />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/thanks" element={<Thanks />} />
-            <Route path="*" element={<Navigate replace to="/" />} />
-          </Routes>
+          {routes}
+          <div className="blue-circle"></div>
+          <div className="red-circle"></div>
         </div>
       </Router>
     </AuthContext.Provider>

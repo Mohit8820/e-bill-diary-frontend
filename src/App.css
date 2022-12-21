@@ -1,47 +1,244 @@
 .App {
   height: 100vh;
-  width: 100vw;
+  max-width: 500px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; */
+  padding: 2.5rem;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+.primary-btn {
+  background-color: var(--accent-color);
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--accent-text-color);
+  padding: 1.5rem 2.5rem;
+  letter-spacing: 0.04em;
+}
+.sec-btn {
+  background-color: var(--light-bg);
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--sec-color);
+  padding: 1.5rem 2.5rem;
+  letter-spacing: 0.04em;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 4rem;
-  overflow-y: scroll;
+  gap: 0.7rem;
+  max-height: 5rem;
+}
+.disable-btn {
+  background: rgba(59, 130, 246, 0.8);
+  font-weight: 500;
+}
+.btn-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.Paid {
+  background: #65a30d;
+}
+.Processing {
+  background: linear-gradient(90deg, #f4cc62 0%, #f8b500 100%);
+}
+.Due {
+  background: linear-gradient(270deg, #f05053 0%, #e99a87 100%);
 }
 nav {
-  position: absolute !important;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  max-width: 500px;
+  width: 100vw;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  transform: translateX(-50%);
+}
+
+.nav-btn {
+  width: 3.8rem;
+  height: 3.8rem;
+  background: var(--light-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sec-color);
+}
+.login,
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4rem;
+  font-size: 1.6rem;
+}
+/*****************login**********************/
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+.input {
+  width: 100%;
+  height: 5rem;
+  background: none;
+  font-weight: 500;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+.input::after {
+  content: "";
+  width: 100%;
+  height: 5rem;
+  position: absolute;
+
+  background: var(--light-bg);
+  backdrop-filter: var(--bg-blur);
+  border-radius: 5rem;
+  z-index: -1;
   top: 0;
   left: 0;
+}
+.input .label {
+  padding: 2rem;
+  background: #73737320;
+}
+.input input {
+  padding: 2rem;
+  background: none;
+  border: none;
+  flex: 1;
+}
+.copyright {
+  font-size: 1.6rem;
+  color: var(--sec-text);
+  margin-left: -1rem;
+}
+/*****************home**********************/
+.price-info {
   width: 100vw;
-  background-color: #f5f5f5;
-  padding: 0.5rem;
+  background: var(--light-bg);
+  font-size: 1.6rem;
+  padding: 1rem 2.5rem;
+}
+.price-info span {
+  font-weight: 600;
+  margin-left: 5rem;
+}
+
+.last-bill {
+  width: 100%;
+  margin-top: 5rem;
+}
+.last-bill-card {
+  width: 100%;
+  height: 20rem;
+  box-shadow: var(--shadow);
+  margin: 1rem 0;
+  padding: 2.5rem;
   display: flex;
-  justify-content: space-evenly !important;
-  box-shadow: 0px 1px 5px #00000033;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
+  align-items: flex-end;
+  gap: 2rem;
   position: relative;
+  border-radius: 1.5rem;
+}
+.last-bill-card::after {
+  content: "";
+  width: 100%;
+  height: 20rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    155deg,
+    rgb(255 255 255 / 50%) 50%,
+    rgba(255 255 255 /30%) 100%
+  );
+  border: 0.1rem solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--bg-blur);
+  border-radius: 1.5rem;
+  z-index: -1;
 }
 
-.form-signin .form-floating:focus-within {
-  z-index: 2;
+.last-bill-card .date {
+  height: 100%;
+  aspect-ratio: 5/6;
+  width: fit-content;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.8);
+  border-radius: 2.2rem;
+  color: var(--accent-text-color);
+  text-align: center;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  font-size: 2.4rem;
+  text-transform: uppercase;
 }
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.last-bill-card .date p {
+  font-size: 5.4rem;
+  margin-top: -0.7rem;
+  margin-bottom: -0.5rem;
+  font-weight: 700;
 }
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.last-bill-card .amount {
+  font-size: 4.8rem;
+  font-weight: 700;
 }
+.last-bill-card .amount span {
+  font-size: 2.4rem;
+}
+.last-bill-card .reading {
+  padding: 0.8rem 1.2rem;
+  border: 0.3rem solid rgba(59, 130, 246, 0.3);
+  border-radius: 5rem;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+.status {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem 0.5rem 3rem;
+  border-radius: 0.5rem 1.5rem 0.5rem 0.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 2.8rem 100%);
+  color: var(--accent-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.status svg {
+  width: 2rem;
+  fill: currentColor;
+}
+/*****************login**********************/
 
-.home,
+/* .home,
 .generate {
   padding: 2rem;
   display: flex;
@@ -60,7 +257,7 @@ nav {
   text-align: center;
   border-radius: 50rem;
   background-color: #20c997;
-}
+} */
 .qr {
   width: 50%;
   margin: auto;
@@ -90,18 +287,7 @@ nav {
 .dis-none {
   display: none;
 }
-.Paid {
-  font-weight: 500;
-  color: green !important;
-}
-.Processing {
-  font-weight: 500;
-  color: rgb(161, 161, 46) !important;
-}
-.Due {
-  font-weight: 500;
-  color: red !important;
-}
+
 .btn-flex {
   display: flex;
   justify-content: space-evenly;

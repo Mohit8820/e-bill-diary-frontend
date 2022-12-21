@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/auth-context";
 import { useNavigate, useLocation } from "react-router-dom";
 import { styledDate } from "../assets/styledDate";
 
-const Current = () => {
+const Bill = () => {
   const auth = useContext(AuthContext);
 
   const location = useLocation();
@@ -121,4 +121,4 @@ const Current = () => {
     );
 };
 
-export default Current;
+export default Bill;

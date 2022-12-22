@@ -6,6 +6,7 @@
   --shadow: -0.1rem 0.4rem 2rem rgba(0, 0, 0, 0.15);
   --accent-color: #3b82f6;
   --accent-text-color: #f3f4f6;
+  --success: #65a30d;
 }
 
 *,

@@ -12,17 +12,33 @@
 }
 
 .primary-btn {
-  background-color: var(--accent-color);
+  background: var(--accent-color);
   font-weight: 500;
   font-size: 1.6rem;
   color: var(--accent-text-color);
   padding: 1.5rem 2.5rem;
   letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+.success-btn {
+  background: var(--success);
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--accent-text-color);
+  padding: 1.5rem 2.5rem;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
 }
 .sec-btn {
   background-color: var(--light-bg);
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: var(--sec-color);
   padding: 1.5rem 2.5rem;
   letter-spacing: 0.04em;
@@ -62,6 +78,7 @@ nav {
   justify-content: flex-end;
   gap: 0.8rem;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .nav-btn {
@@ -74,7 +91,8 @@ nav {
   color: var(--sec-color);
 }
 .login,
-.home {
+.home,
+.generate {
   width: 100%;
   height: 100%;
   display: flex;
@@ -155,20 +173,21 @@ nav {
 }
 .last-bill-card {
   width: 100%;
-  height: 20rem;
+  height: 18rem;
   box-shadow: var(--shadow);
   margin: 1rem 0;
-  padding: 2.5rem;
+  padding: 2.3rem;
+  padding-right: 1rem;
   display: flex;
   align-items: flex-end;
-  gap: 2rem;
+  gap: 1.8rem;
   position: relative;
   border-radius: 1.5rem;
 }
 .last-bill-card::after {
   content: "";
   width: 100%;
-  height: 20rem;
+  height: 18rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -187,13 +206,13 @@ nav {
   height: 100%;
   aspect-ratio: 5/6;
   width: fit-content;
-  padding: 1.5rem;
+  padding: 1rem;
   background: rgba(59, 130, 246, 0.8);
   border-radius: 2.2rem;
   color: var(--accent-text-color);
   text-align: center;
   letter-spacing: 0.04em;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 2.4rem;
   text-transform: uppercase;
 }
@@ -201,11 +220,11 @@ nav {
   font-size: 5.4rem;
   margin-top: -0.7rem;
   margin-bottom: -0.5rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 .last-bill-card .amount {
   font-size: 4.8rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 .last-bill-card .amount span {
   font-size: 2.4rem;
@@ -214,8 +233,8 @@ nav {
   padding: 0.8rem 1.2rem;
   border: 0.3rem solid rgba(59, 130, 246, 0.3);
   border-radius: 5rem;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.7rem;
+  margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
 .status {
@@ -223,20 +242,100 @@ nav {
   top: 0;
   right: 0;
   text-transform: uppercase;
-  padding: 0.5rem 1.5rem 0.5rem 3rem;
+  padding: 0.5rem 1.5rem 0.5rem 2.5rem;
   border-radius: 0.5rem 1.5rem 0.5rem 0.5rem;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 2.8rem 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 2.4rem 100%);
   color: var(--accent-text-color);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-size: 1.4rem;
 }
 .status svg {
-  width: 2rem;
+  width: 1.6rem;
   fill: currentColor;
 }
-/*****************login**********************/
+/*****************bill**********************/
+
+.bill {
+  position: relative;
+  width: 100%;
+  padding: 2.3rem;
+  /* display: flex;
+  align-items: flex-end;
+  gap: 1.8rem; */
+  border-radius: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.bill::after {
+  content: "";
+  width: 100%;
+  box-shadow: var(--shadow);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    155deg,
+    rgb(255 255 255 / 50%) 50%,
+    rgba(255 255 255 /30%) 100%
+  );
+  border: 0.1rem solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--bg-blur);
+  border-radius: 1.5rem;
+  z-index: -1;
+}
+
+.bill table {
+  width: 100%;
+}
+.bill tr {
+  display: flex;
+  padding-top: 2rem !important;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.bill td {
+  text-align: right;
+}
+.bill th {
+  color: var(--sec-color);
+}
+
+.bill-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 2.8rem;
+  position: relative;
+}
+.bill-head p {
+  margin-bottom: 3rem;
+}
+.qr {
+  width: 45%;
+  z-index: 1;
+}
+.bill-head::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 0.1rem;
+  background-color: var(--sec-color);
+  bottom: 2rem;
+  right: 0;
+  z-index: 0;
+}
+/*****************history**********************/
+.bill-list {
+  margin-top: 5rem;
+  height: 100%;
+}
 
 /* .home,
 .generate {
@@ -258,10 +357,7 @@ nav {
   border-radius: 50rem;
   background-color: #20c997;
 } */
-.qr {
-  width: 50%;
-  margin: auto;
-}
+
 .copy-upi {
   border: none;
   background: none;
@@ -288,10 +384,6 @@ nav {
   display: none;
 }
 
-.btn-flex {
-  display: flex;
-  justify-content: space-evenly;
-}
 form {
   position: relative;
 }
@@ -314,9 +406,7 @@ form {
   padding: 0.2rem;
   align-self: stretch;
 }
-.bill {
-  max-width: 90vw;
-}
+
 .history-table {
   display: block;
   height: 50vh;
@@ -366,9 +456,7 @@ form {
   max-width: 8rem;
   display: inline-block;
 }
-.shaded-bg {
-  background-color: #f5f5f5;
-}
+
 .dropdown-menu {
   min-width: auto !important;
 }

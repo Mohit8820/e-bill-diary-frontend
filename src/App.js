@@ -37,7 +37,7 @@ function App() {
         <Route path="/bill" element={<Bill />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/thanks" element={<Thanks />} />
-        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     );
   } else {
@@ -45,7 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/thanks" element={<Thanks />} />
-        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     );
   }

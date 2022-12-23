@@ -4,9 +4,23 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: var(--backdrop-bg);
+  backdrop-filter: blur(1.5rem);
+
   z-index: 99999999;
+}
+.bolt1 {
+  position: absolute;
+  display: inline-block; /* don't forget this to be able to apply a transform */
+  animation: DVD1 2s ease-in-out infinite alternate-reverse;
+  right: 40%;
+  top: 40%;
+}
+
+@keyframes DVD1 {
+  to {
+    right: 60%;
+    top: 60%;
+    transform: translate(100%, -100%) scale(0.5);
+  }
 }

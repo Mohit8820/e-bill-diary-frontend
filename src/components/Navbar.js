@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../contexts/auth-context";
 var r = document.querySelector(":root");
+
 function toggleLight() {
-  // light.style.display = "none";
-  // dark.style.display = "block";
   r.style.setProperty("--text-color", "#404040");
   r.style.setProperty("--bg", "#f5f5f5");
   r.style.setProperty("--sec-color", "#737373");
@@ -14,13 +13,10 @@ function toggleLight() {
   r.style.setProperty("--faded-bg-1", " rgb(255 255 255 / 50%)");
   r.style.setProperty("--faded-bg-2", " rgb(255 255 255 / 30%)");
   r.style.setProperty("--backdrop-bg", "#ffffff70");
-
   r.style.setProperty("--ball-bg", "rgba(254, 254, 254, 0.5)");
 }
 
 function toggleDark() {
-  // dark.style.display = "none";
-  // light.style.display = "block";
   r.style.setProperty("--text-color", "#F3F4F6");
   r.style.setProperty("--bg", "#2B2B2B");
   r.style.setProperty("--sec-color", "#e5e5e5");
@@ -29,12 +25,13 @@ function toggleDark() {
   r.style.setProperty("--faded-bg-1", " rgb(255 255 255 / 30%)");
   r.style.setProperty("--faded-bg-2", " rgb(255 255 255 / 5%)");
   r.style.setProperty("--backdrop-bg", "#00000070");
-
   r.style.setProperty("--ball-bg", "rgba(0, 0, 0, 0.2)");
 }
 
 const Navbar = () => {
   const auth = useContext(AuthContext);
+
+  const [light, setLight] = useState(true);
   const navigate = useNavigate();
   return (
     <React.Fragment>
@@ -73,27 +70,106 @@ const Navbar = () => {
             onClick={() => {
               var rs = getComputedStyle(r);
               // Alert the value of the --blue variable
-              console.log(rs.getPropertyValue("--bg"));
               if (rs.getPropertyValue("--bg") == "#2B2B2B") {
+                setLight(true);
                 toggleLight();
-              } else toggleDark();
+              } else {
+                setLight(false);
+                toggleDark();
+              }
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1.9rem"
-              height="1.9rem"
-              viewBox="0 0 22 22"
-              fill="none"
-            >
-              <path
-                d="M21 11.9009C20.8248 13.7963 20.1135 15.6025 18.9493 17.1084C17.785 18.6142 16.216 19.7573 14.4257 20.404C12.6355 21.0506 10.6981 21.174 8.84032 20.7598C6.98251 20.3455 5.28109 19.4108 3.93516 18.0648C2.58923 16.7189 1.65445 15.0175 1.2402 13.1597C0.825954 11.3019 0.949372 9.3645 1.59601 7.57428C2.24266 5.78405 3.38578 4.215 4.89162 3.05074C6.39746 1.88648 8.20374 1.17516 10.0991 1C8.98942 2.50126 8.45544 4.35094 8.59427 6.21263C8.7331 8.07432 9.53553 9.82434 10.8556 11.1444C12.1757 12.4645 13.9257 13.2669 15.7874 13.4057C17.6491 13.5446 19.4987 13.0106 21 11.9009V11.9009Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            {!light ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.9rem"
+                height="1.9rem"
+                viewBox="0 0 22 22"
+                fill="none"
+                className="dark"
+              >
+                <path
+                  d="M21 11.9009C20.8248 13.7963 20.1135 15.6025 18.9493 17.1084C17.785 18.6142 16.216 19.7573 14.4257 20.404C12.6355 21.0506 10.6981 21.174 8.84032 20.7598C6.98251 20.3455 5.28109 19.4108 3.93516 18.0648C2.58923 16.7189 1.65445 15.0175 1.2402 13.1597C0.825954 11.3019 0.949372 9.3645 1.59601 7.57428C2.24266 5.78405 3.38578 4.215 4.89162 3.05074C6.39746 1.88648 8.20374 1.17516 10.0991 1C8.98942 2.50126 8.45544 4.35094 8.59427 6.21263C8.7331 8.07432 9.53553 9.82434 10.8556 11.1444C12.1757 12.4645 13.9257 13.2669 15.7874 13.4057C17.6491 13.5446 19.4987 13.0106 21 11.9009V11.9009Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2rem"
+                height="2rem"
+                viewBox="0 0 20 20"
+                fill="none"
+                className="light"
+              >
+                <path
+                  d="M10.4749 14.1804C12.6087 14.1804 14.3385 12.4506 14.3385 10.3168C14.3385 8.18294 12.6087 6.45313 10.4749 6.45313C8.34106 6.45313 6.61125 8.18294 6.61125 10.3168C6.61125 12.4506 8.34106 14.1804 10.4749 14.1804Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M10.4749 1.81676V3.36222"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M10.4749 17.2713V18.8168"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.46306 4.30494L5.56033 5.40222"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15.3894 15.2313L16.4867 16.3286"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M1.97488 10.3168H3.52034"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17.4294 10.3168H18.9749"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.46306 16.3286L5.56033 15.2313"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15.3894 5.40222L16.4867 4.30494"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            )}
           </button>
 
           <button
@@ -131,6 +207,113 @@ const Navbar = () => {
       ) : (
         <nav>
           <button
+            className="nav-btn display-mode"
+            type="button"
+            onClick={() => {
+              var rs = getComputedStyle(r);
+              // Alert the value of the --blue variable
+              if (rs.getPropertyValue("--bg") == "#2B2B2B") {
+                setLight(true);
+                toggleLight();
+              } else {
+                setLight(false);
+                toggleDark();
+              }
+            }}
+          >
+            {!light ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.9rem"
+                height="1.9rem"
+                viewBox="0 0 22 22"
+                fill="none"
+                className="dark"
+              >
+                <path
+                  d="M21 11.9009C20.8248 13.7963 20.1135 15.6025 18.9493 17.1084C17.785 18.6142 16.216 19.7573 14.4257 20.404C12.6355 21.0506 10.6981 21.174 8.84032 20.7598C6.98251 20.3455 5.28109 19.4108 3.93516 18.0648C2.58923 16.7189 1.65445 15.0175 1.2402 13.1597C0.825954 11.3019 0.949372 9.3645 1.59601 7.57428C2.24266 5.78405 3.38578 4.215 4.89162 3.05074C6.39746 1.88648 8.20374 1.17516 10.0991 1C8.98942 2.50126 8.45544 4.35094 8.59427 6.21263C8.7331 8.07432 9.53553 9.82434 10.8556 11.1444C12.1757 12.4645 13.9257 13.2669 15.7874 13.4057C17.6491 13.5446 19.4987 13.0106 21 11.9009V11.9009Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2rem"
+                height="2rem"
+                viewBox="0 0 20 20"
+                fill="none"
+                className="light"
+              >
+                <path
+                  d="M10.4749 14.1804C12.6087 14.1804 14.3385 12.4506 14.3385 10.3168C14.3385 8.18294 12.6087 6.45313 10.4749 6.45313C8.34106 6.45313 6.61125 8.18294 6.61125 10.3168C6.61125 12.4506 8.34106 14.1804 10.4749 14.1804Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M10.4749 1.81676V3.36222"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M10.4749 17.2713V18.8168"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.46306 4.30494L5.56033 5.40222"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15.3894 15.2313L16.4867 16.3286"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M1.97488 10.3168H3.52034"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17.4294 10.3168H18.9749"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.46306 16.3286L5.56033 15.2313"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15.3894 5.40222L16.4867 4.30494"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            )}
+          </button>
+          <button
             className="nav-btn"
             type="button"
             onClick={() => {
@@ -153,7 +336,7 @@ const Navbar = () => {
               />
               <path
                 d="M8.89087 1V9.76293"
-                stroke="#737373"
+                stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"

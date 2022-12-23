@@ -63,8 +63,10 @@ function App() {
         <div className="App">
           <Navbar />
           {routes}
-          <div className="blue-circle"></div>
-          <div className="red-circle"></div>
+          <div className="bg-circles">
+            <div className="blue-circle"></div>
+            <div className="red-circle"></div>
+          </div>
         </div>
       </Router>
     </AuthContext.Provider>

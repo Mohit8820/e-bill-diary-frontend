@@ -547,7 +547,8 @@ small {
   z-index: -1;
 }
 .payment-qr {
-  max-height: 27vh;
+  height: 27vh;
+  max-height: 24rem;
 }
 .payment-card p {
   padding: 1rem 1.5rem;
@@ -568,7 +569,7 @@ small {
 }
 .copiedToast {
   font-size: 0.6em;
-  color: #6c757d;
+  color: var(--sec-color);
   position: absolute;
   bottom: -1.5rem;
   left: 0;

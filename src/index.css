@@ -106,10 +106,27 @@ code {
     monospace;
 }
 
+.bg-circles {
+  width: 110vw;
+  height: 30rem;
+  position: fixed;
+  top: 30%;
+  left: -10%;
+  z-index: -2;
+  animation: rotation 200s infinite linear;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .blue-circle {
   width: 13rem;
   height: 13rem;
-
+  animation: rotation 10s infinite linear;
   background: linear-gradient(
     45.44deg,
     var(--ball-bg) -0.26%,
@@ -135,7 +152,37 @@ code {
   transform: rotate(90deg);
   border-radius: 50%;
   position: absolute;
-  top: 30%;
-  left: -10%;
+  animation: rotation 10s infinite linear;
   z-index: -2;
+}
+
+@media (max-width: 390px) {
+  html {
+    font-size: 60%;
+  }
+}
+@media (max-width: 370px) {
+  html {
+    font-size: 57%;
+  }
+}
+@media (max-width: 352px) {
+  html {
+    font-size: 54%;
+  }
+}
+@media (max-width: 333px) {
+  html {
+    font-size: 50%;
+  }
+}
+@media (max-width: 310px) {
+  html {
+    font-size: 45%;
+  }
+}
+@media (max-width: 278px) {
+  html {
+    font-size: 40%;
+  }
 }

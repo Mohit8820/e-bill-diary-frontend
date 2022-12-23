@@ -13,7 +13,6 @@ const Generate = () => {
 
   const location = useLocation();
   const user = location.state;
-  console.log(user.userId);
   const [currentReading, setCurrentReading] = useState(user.lastBill.Reading);
   const handleChange = (event) => {
     setCurrentReading(event.target.value);
@@ -35,7 +34,6 @@ const Generate = () => {
             Authorization: "Bearer " + auth.token,
           }
         );
-        console.log(responseData);
         navigate("/bill", {
           state: {
             userId: user.userId,
@@ -51,16 +49,14 @@ const Generate = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <div className="generate">
-        <span className="my-badge">Generate New Bill</span>
-        <figcaption className="blockquote-footer">
+        <h2>Generate</h2>
+        <figcaption className="info">
           Some Instructions<cite title="Source Title"> Detailed Steps </cite>
         </figcaption>
-        <form onSubmit={(event) => showBill(event)}>
+        <form onSubmit={(event) => showBill(event)} className="generate-form">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">
-              Previous reading
-            </span>
+          <div className="input">
+            <div className="label">Previous reading</div>
             <input
               type="text"
               className="form-control"
@@ -71,10 +67,8 @@ const Generate = () => {
               readOnly={true}
             />
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">
-              Current reading
-            </span>
+          <div className="input">
+            <div className="label">Current reading</div>
             <input
               type="number"
               className="form-control"
@@ -87,7 +81,7 @@ const Generate = () => {
               required={true}
             />
           </div>
-          <button className="btn btn-primary" type="submit">
+          <button className="primary-btn" type="submit">
             Generate
           </button>
         </form>

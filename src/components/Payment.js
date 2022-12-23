@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { AuthContext } from "../contexts/auth-context";
@@ -15,30 +15,38 @@ const Payment = () => {
 
   const location = useLocation();
   const user = location.state;
-  console.log(user.lastBill.id);
   const [copied, setCopied] = useState(false);
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(true);
 
   const handleCopy = () => {
     navigator.clipboard.writeText("mohitsah8820@oksbi");
     setCopied(true);
-    const myTimeout = setTimeout(closeToast, 5000);
+    const myTimeout = setTimeout(closeToast, 3000);
 
     function closeToast() {
       setCopied(false);
     }
   };
 
+  const hiddenFileInput = useRef(null);
+  const submitBtn = useRef(null);
+
+  const [fileName, setFileName] = useState("Select file");
+
   const [file, setFile] = useState(null);
   const handleFileInput = (e) => {
     // handle validations
 
     if (e.target.files) {
-      console.log(e.target.files.length);
       if (e.target.files.length > 1) alert("select only one file");
-      else setFile(e.target.files[0]);
+      else {
+        setFile(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+        setDisable(false);
+      }
     }
   };
+
   /*   console.log("abc");
     console.log(file);
     function sendMail(event) {
@@ -65,9 +73,9 @@ const Payment = () => {
   */
 
   const updateToPending = async (event) => {
+    event.preventDefault();
     if (file !== null) {
       if (auth.isLoggedIn) {
-        setDisable(true);
         try {
           await sendRequest(
             `${process.env.REACT_APP_API_URL}/users/update/${user.lastBill.id}`,
@@ -82,6 +90,8 @@ const Payment = () => {
               Authorization: "Bearer " + auth.token,
             }
           );
+          setDisable(true);
+          submitBtn.current.click();
         } catch (err) {}
       } else navigate("/");
     }
@@ -91,39 +101,49 @@ const Payment = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <div className="generate">
-        <span className="my-badge">Payment</span>
+        <h2>Payment</h2>
 
-        <div className="payment">
-          <figcaption className="blockquote-footer">
-            To make payment - Scan the QR code or pay to the given UPI ID
-          </figcaption>
-          <img src={qr} alt="qr code" className="qr" />
+        <div className="payment-card">
+          <img src={qr} alt="qr code" className="payment-qr" />
+          <figcaption className="">Scan the QR code to pay</figcaption>
           <p>
             UPI ID : <strong id="myUpi">mohitsah8820@oksbi</strong>
             <button onClick={handleCopy} className="copy-upi">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-clipboard"
-                viewBox="0 0 16 16"
+                width="1.7rem"
+                height="1.7rem"
+                viewBox="0 0 17 17"
+                fill="none"
               >
-                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                <path
+                  d="M14.5 6.25H7.75C6.92157 6.25 6.25 6.92157 6.25 7.75V14.5C6.25 15.3284 6.92157 16 7.75 16H14.5C15.3284 16 16 15.3284 16 14.5V7.75C16 6.92157 15.3284 6.25 14.5 6.25Z"
+                  stroke="var(--text-color)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.25 10.75H2.5C2.10218 10.75 1.72064 10.592 1.43934 10.3107C1.15804 10.0294 1 9.64782 1 9.25V2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H9.25C9.64782 1 10.0294 1.15804 10.3107 1.43934C10.592 1.72064 10.75 2.10218 10.75 2.5V3.25"
+                  stroke="var(--text-color)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
-              {copied && <div className="copiedToast">UPI copied</div>}
+              {copied && <div className="copiedToast">copied</div>}
             </button>
           </p>
         </div>
-        <div>
-          <figcaption className="blockquote-footer">
+        <div className="payment-form">
+          <figcaption className="info">
             After payment - Kindly submit the screenshot of the payment done
           </figcaption>
           <form
             action="https://formsubmit.co/lemo040520@gmail.com"
             method="POST"
             //onSubmit={(event) => sendMail(event)}
+
             encType="multipart/form-data"
           >
             {isLoading && <LoadingSpinner asOverlay />}
@@ -132,7 +152,7 @@ const Payment = () => {
             <input
               type="hidden"
               name="_next"
-              value="https://e-bill-diary.herokuapp.com/thanks"
+              value="http://localhost:3000/thanks"
             />
             <div className="dis-none">
               <div>
@@ -168,34 +188,54 @@ const Payment = () => {
                 />
               </div>
             </div>
-            <div>
-              <div className="input-group mb-3">
-                <input
-                  type="file"
-                  id="paid-ss"
-                  name="attachment"
-                  className="form-control"
-                  onChange={(e) => handleFileInput(e)}
-                  accept="image/png, image/jpeg"
-                  required
-                />
+            <div className="input">
+              <input
+                type="file"
+                id="paid-ss"
+                name="attachment"
+                className="form-control"
+                ref={hiddenFileInput}
+                onChange={(e) => handleFileInput(e)}
+                accept="image/png, image/jpeg"
+                required
+              />
+              <div
+                className="label"
+                onClick={() => {
+                  hiddenFileInput.current.click();
+                }}
+              >
+                Choose file
               </div>
-              <div className="input-group  mb-3">
-                <span className="input-group-text">Note (optional)</span>
-                <textarea
-                  className="form-control"
-                  aria-label="With textarea"
-                  name="note"
-                ></textarea>
+              <input
+                type="text"
+                readOnly
+                onClick={() => {
+                  hiddenFileInput.current.click();
+                }}
+                value={fileName}
+              />
+            </div>
+            <div className="input note">
+              <div className="label">
+                Note <br /> (optional)
               </div>
+              <textarea
+                className=""
+                aria-label="With textarea"
+                name="note"
+              ></textarea>
             </div>
 
             <button
-              className="btn btn-primary"
-              type="submit"
+              className={`primary-btn ${disable ? "disable-btn" : ""}`}
               onClick={updateToPending}
+              disabled={disable}
             >
-              {disable ? "Wait" : "Submit"}
+              {disable && file !== null ? "Wait" : "Submit"}
+            </button>
+            <button className="dis-none" type="submit" ref={submitBtn}>
+              actual submit btn
             </button>
           </form>
         </div>

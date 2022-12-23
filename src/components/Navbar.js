@@ -2,6 +2,36 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../contexts/auth-context";
+var r = document.querySelector(":root");
+function toggleLight() {
+  // light.style.display = "none";
+  // dark.style.display = "block";
+  r.style.setProperty("--text-color", "#404040");
+  r.style.setProperty("--bg", "#f5f5f5");
+  r.style.setProperty("--sec-color", "#737373");
+  r.style.setProperty("--sec-color-02", "#73737320");
+  r.style.setProperty("--light-bg", " rgba(255, 255, 255, 0.7)");
+  r.style.setProperty("--faded-bg-1", " rgb(255 255 255 / 50%)");
+  r.style.setProperty("--faded-bg-2", " rgb(255 255 255 / 30%)");
+  r.style.setProperty("--backdrop-bg", "#ffffff70");
+
+  r.style.setProperty("--ball-bg", "rgba(254, 254, 254, 0.5)");
+}
+
+function toggleDark() {
+  // dark.style.display = "none";
+  // light.style.display = "block";
+  r.style.setProperty("--text-color", "#F3F4F6");
+  r.style.setProperty("--bg", "#2B2B2B");
+  r.style.setProperty("--sec-color", "#e5e5e5");
+  r.style.setProperty("--sec-color-02", "#e5e5e520");
+  r.style.setProperty("--light-bg", " rgba(255, 255, 255, 0.3)");
+  r.style.setProperty("--faded-bg-1", " rgb(255 255 255 / 30%)");
+  r.style.setProperty("--faded-bg-2", " rgb(255 255 255 / 5%)");
+  r.style.setProperty("--backdrop-bg", "#00000070");
+
+  r.style.setProperty("--ball-bg", "rgba(0, 0, 0, 0.2)");
+}
 
 const Navbar = () => {
   const auth = useContext(AuthContext);
@@ -38,11 +68,15 @@ const Navbar = () => {
           </button>
 
           <button
-            className="nav-btn"
+            className="nav-btn display-mode"
             type="button"
             onClick={() => {
-              auth.logout();
-              navigate("/");
+              var rs = getComputedStyle(r);
+              // Alert the value of the --blue variable
+              console.log(rs.getPropertyValue("--bg"));
+              if (rs.getPropertyValue("--bg") == "#2B2B2B") {
+                toggleLight();
+              } else toggleDark();
             }}
           >
             <svg
@@ -86,7 +120,7 @@ const Navbar = () => {
               />
               <path
                 d="M8.89087 1V9.76293"
-                stroke="#737373"
+                stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"

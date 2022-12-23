@@ -189,7 +189,7 @@ const Home = () => {
                   />
                   <path
                     d="M4.87988 15.076L8.73548 10.3226C9.37388 9.54221 10.5079 9.489 11.1967 10.2251L11.9947 11.0675C12.6835 11.7947 13.8175 11.7504 14.4559 10.97L18.3199 6.20776"
-                    stroke="#737373"
+                    stroke="currentColor"
                     stroke-width="2"
                     stroke-miterlimit="10"
                     stroke-linecap="round"

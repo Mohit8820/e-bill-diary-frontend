@@ -10,6 +10,7 @@ const Bill = () => {
 
   const location = useLocation();
   const user = location.state;
+  console.log(user);
 
   if (user !== null) {
     var billdate = styledDate(user.lastBill.dateGenerated);

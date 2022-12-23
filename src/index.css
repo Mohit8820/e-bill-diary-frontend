@@ -1,15 +1,26 @@
 :root {
+  --bg: #f5f5f5;
   --text-color: #404040;
   --sec-color: #737373;
+  --sec-color-02: #73737320;
   --light-bg: rgba(255, 255, 255, 0.7);
   --bg-blur: blur(0.75rem);
   --shadow: -0.1rem 0.4rem 2rem rgba(0, 0, 0, 0.15);
   --accent-color: #3b82f6;
   --sec-accent-color: rgba(59, 130, 246, 0.8);
   --accent-text-color: #f3f4f6;
-  --success: #65a30d;
-  --warning: linear-gradient(90deg, #f4cc62 0%, #f8b500 100%);
-  --danger: linear-gradient(270deg, #f05053 0%, #e99a87 100%);
+  --success: linear-gradient(90deg, rgb(132, 204, 22) 0%, #73bb0e 100%);
+  --warning: linear-gradient(90deg, #f4cc62 0%, rgb(248, 181, 0) 100%);
+  --danger: linear-gradient(270deg, rgb(240, 80, 83) 0%, #e99a87 100%);
+  --faded-bg-1: rgb(255 255 255 / 50%);
+  --faded-bg-2: rgba(255 255 255 /30%);
+  --faded-bg: linear-gradient(
+    155deg,
+    var(--faded-bg-1) 50%,
+    var(--faded-bg-2) 100%
+  );
+  --backdrop-bg: #ffffff70;
+  --ball-bg: rgba(254, 254, 254, 0.48);
 }
 
 *,
@@ -37,21 +48,42 @@ body {
   /* overflow: hidden; */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  background-color: var(--bg);
+  height: 100vh;
+  position: relative;
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
     167.91deg,
     rgba(59, 130, 246, 0.2) 0%,
     rgba(240, 80, 83, 0.15) 100%
   );
-  height: 100vh;
+  z-index: -100;
 }
-
+li {
+  list-style: none;
+}
 button {
   border: none;
   border-radius: 5rem;
-  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+input,
+textarea {
+  color: var(--text-color);
 }
 input:focus {
   outline: none;
+}
+::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 h2 {
@@ -80,7 +112,7 @@ code {
 
   background: linear-gradient(
     45.44deg,
-    rgba(254, 254, 254, 0.5) -0.26%,
+    var(--ball-bg) -0.26%,
     rgba(59, 130, 246, 0.5) 100%
   );
   filter: blur(2.5px);
@@ -96,7 +128,7 @@ code {
   height: 17.7rem;
   background: linear-gradient(
     44.36deg,
-    rgba(254, 254, 254, 0.48) 0%,
+    var(--ball-bg) 0%,
     rgba(240, 80, 83, 0.5) 100%
   );
   filter: blur(0.25rem);

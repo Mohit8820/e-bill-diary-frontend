@@ -69,6 +69,7 @@ const History = () => {
     else prevReading = user.history[index - 1].Reading;
     navigate("/bill", {
       state: {
+        userId: user.id,
         name: user.name,
         lastBill: user.history[index],
         prevReading: prevReading,
@@ -102,19 +103,16 @@ const History = () => {
         header="Delete Bill"
         footer={
           <div className="btn-flex">
-            <button
-              onClick={() => setDeleteBill(false)}
-              className="btn btn-secondary"
-            >
+            <button onClick={() => setDeleteBill(false)} className="sec-btn">
               Cancel
             </button>
-            <button onClick={deleteBillRequest} className="btn btn-warning">
+            <button onClick={deleteBillRequest} className="primary-btn Due">
               Okay
             </button>
           </div>
         }
       >
-        Do you want to delete the question
+        Do you want to delete the bill
       </Modal>
       <Modal
         onCancel={() => setUpdateModal(false)}

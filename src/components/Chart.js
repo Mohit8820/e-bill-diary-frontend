@@ -22,54 +22,57 @@ const Chart = () => {
       dates.push(styledDate(bill.dateGenerated));
       amounts.push(bill.Amount);
       if (bill.Status === "Due") {
-        bgcolor.push("rgba(255, 99, 132, 0.2)");
-        bdcolor.push("rgba(255, 99, 132, 1)");
+        bgcolor.push("rgba(240, 80, 83, 0.2)");
+        bdcolor.push("rgba(240, 80, 83, 1)");
       } else if (bill.Status === "Processing") {
-        bgcolor.push("rgba(255, 159, 64, 0.2)");
-        bdcolor.push("rgba(255, 159, 64, 1)");
+        bgcolor.push("rgba(248, 181, 0, 0.2)");
+        bdcolor.push("rgba(248, 181, 0, 1)");
       } else {
-        bgcolor.push("rgba(75, 192, 192, 0.2)");
-        bdcolor.push("rgba(75, 192, 192, 1)");
+        bgcolor.push("rgba(132, 204, 22, 0.2)");
+        bdcolor.push("rgba(132, 204, 22, 1)");
       }
     });
 
     return (
-      <div className="chart-box">
-        <Bar
-          data={{
-            labels: dates,
-            datasets: [
-              {
-                label: "Bill Amount",
-                data: amounts,
-                backgroundColor: bgcolor,
-                borderColor: bdcolor,
-                borderWidth: 1,
+      <React.Fragment>
+        <h2>Chart</h2>
+        <div className="chart-box">
+          <Bar
+            data={{
+              labels: dates,
+              datasets: [
+                {
+                  label: "Bill Amount",
+                  data: amounts,
+                  backgroundColor: bgcolor,
+                  borderColor: bdcolor,
+                  borderWidth: 1,
+                },
+                // {
+                //   label: 'Quantity',
+                //   data: [47, 52, 67, 58, 9, 50],
+                //   backgroundColor: 'orange',
+                //   borderColor: 'red',
+                // },
+              ],
+            }}
+            height={600}
+            width={400}
+            options={{
+              maintainAspectRatio: false,
+              responsive: true,
+              scales: {
+                y: { beginAtZero: true },
               },
-              // {
-              //   label: 'Quantity',
-              //   data: [47, 52, 67, 58, 9, 50],
-              //   backgroundColor: 'orange',
-              //   borderColor: 'red',
-              // },
-            ],
-          }}
-          height={600}
-          width={400}
-          options={{
-            maintainAspectRatio: false,
-            responsive: true,
-            scales: {
-              y: { beginAtZero: true },
-            },
-            legend: {
-              labels: {
-                fontSize: 25,
+              legend: {
+                labels: {
+                  fontSize: 25,
+                },
               },
-            },
-          }}
-        />
-      </div>
+            }}
+          />
+        </div>
+      </React.Fragment>
     );
   } else
     return (

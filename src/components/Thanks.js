@@ -15,9 +15,9 @@ const Thanks = () => {
 
   return (
     <div className="home">
-      <span className="my-badge">Thank You</span>
-      <p className="lead">Your payment will be reviewed and updated soon...</p>
-      <button type="button" className="btn btn-lg btn-primary" onClick={goHome}>
+      <span className="thank">Thank You</span>
+      <p className="info">Your payment will be reviewed and updated soon...</p>
+      <button type="button" className="primary-btn" onClick={goHome}>
         Go Home
       </button>
     </div>

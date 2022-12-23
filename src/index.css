@@ -31,7 +31,7 @@ body {
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  /* overflow: hidden; */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   background: linear-gradient(
@@ -39,6 +39,7 @@ body {
     rgba(59, 130, 246, 0.2) 0%,
     rgba(240, 80, 83, 0.15) 100%
   );
+  height: 100vh;
 }
 
 button {

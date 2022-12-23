@@ -5,8 +5,11 @@
   --bg-blur: blur(0.75rem);
   --shadow: -0.1rem 0.4rem 2rem rgba(0, 0, 0, 0.15);
   --accent-color: #3b82f6;
+  --sec-accent-color: rgba(59, 130, 246, 0.8);
   --accent-text-color: #f3f4f6;
   --success: #65a30d;
+  --warning: linear-gradient(90deg, #f4cc62 0%, #f8b500 100%);
+  --danger: linear-gradient(270deg, #f05053 0%, #e99a87 100%);
 }
 
 *,
@@ -58,6 +61,10 @@ h2 {
   font-weight: 600;
   font-size: 2.8rem;
 }
+/* input[type="datetime-local"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+} */
 
 ::-webkit-scrollbar {
   display: none;

@@ -152,7 +152,7 @@ const Payment = () => {
             <input
               type="hidden"
               name="_next"
-              value="http://localhost:3000/thanks"
+              value="http://ebilldiary.netlify.app/thanks"
             />
             <div className="dis-none">
               <div>

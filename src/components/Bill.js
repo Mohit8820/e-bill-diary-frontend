@@ -10,7 +10,6 @@ const Bill = () => {
 
   const location = useLocation();
   const user = location.state;
-  console.log(user);
 
   if (user !== null) {
     var billdate = styledDate(user.lastBill.dateGenerated);
@@ -201,8 +200,8 @@ const Bill = () => {
   else
     return (
       <div>
-      <span className="info">Session time out...Please Login</span>
-    </div>
+        <span className="info">Session time out...Please Login</span>
+      </div>
     );
 };
 

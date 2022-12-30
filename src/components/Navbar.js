@@ -70,7 +70,7 @@ const Navbar = () => {
             onClick={() => {
               var rs = getComputedStyle(r);
               // Alert the value of the --blue variable
-              if (rs.getPropertyValue("--bg") == "#2B2B2B") {
+              if (rs.getPropertyValue("--bg") === "#2B2B2B") {
                 setLight(true);
                 toggleLight();
               } else {
@@ -212,7 +212,7 @@ const Navbar = () => {
             onClick={() => {
               var rs = getComputedStyle(r);
               // Alert the value of the --blue variable
-              if (rs.getPropertyValue("--bg") == "#2B2B2B") {
+              if (rs.getPropertyValue("--bg") === "#2B2B2B") {
                 setLight(true);
                 toggleLight();
               } else {

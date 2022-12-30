@@ -53,7 +53,6 @@ const AdminHome = () => {
             Authorization: "Bearer " + auth.token,
           }
         );
-        console.log(responseData);
       } catch (err) {}
     } else navigate("/");
   };
@@ -82,8 +81,7 @@ const AdminHome = () => {
         ubody = {
           name: updatedUser.name,
         };
-      console.log("ubody");
-      console.log(ubody);
+
       try {
         await sendRequest(
           `${process.env.REACT_APP_API_URL}/users/updateUser/${updatedUser.userId}`,
@@ -99,7 +97,6 @@ const AdminHome = () => {
       } catch (err) {}
     }
   };
-  console.log(updatedUser);
 
   if (auth.userId === process.env.REACT_APP_ADMIN_ID)
     return (

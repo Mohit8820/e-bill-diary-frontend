@@ -205,7 +205,7 @@ const Payment = () => {
                   hiddenFileInput.current.click();
                 }}
               >
-                Choose file
+                Screenshot
               </div>
               <input
                 type="text"

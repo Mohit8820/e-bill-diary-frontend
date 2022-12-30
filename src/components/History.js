@@ -25,7 +25,6 @@ const History = () => {
   });
 
   useEffect(() => {
-    console.log(location.state);
     setUser(location.state);
   }, [location.state]);
   var billDate = [];
@@ -36,7 +35,6 @@ const History = () => {
 
   const updateStatus = async (event) => {
     event.preventDefault();
-    console.log(statusBody);
     try {
       const responseData = await sendRequest(
         `${process.env.REACT_APP_API_URL}/users/update/${statusBody.bill_id}`,
@@ -47,7 +45,6 @@ const History = () => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      console.log(responseData);
       navigate("/history", { state: responseData.user });
       setUpdateModal(false);
     } catch (err) {}
@@ -63,7 +60,6 @@ const History = () => {
   };
 
   const openBill = (index) => {
-    console.log(index);
     var prevReading;
     if (index <= 0) prevReading = 0;
     else prevReading = user.history[index - 1].Reading;
@@ -258,7 +254,6 @@ const History = () => {
           </div>
           <textarea
             className=""
-            aria-label="With textarea"
             name="note"
             value={statusBody.note}
             onChange={(event) => {
@@ -479,98 +474,14 @@ const History = () => {
                       </div>
                       <div className="col2">{bill.Reading}</div>
                       <div className="col3">{bill.Amount}</div>
-                      {auth.userId !== process.env.REACT_APP_ADMIN_ID && (
-                        <div className={`col4 ${bill.Status}`}>
-                          {bill.Status}
-                          <br />
-                          {bill.Status === "Paid" && (
-                            <span>{styledDate(bill.datePaid)}</span>
-                          )}
-                        </div>
-                      )}
-                      {auth.userId === process.env.REACT_APP_ADMIN_ID && (
-                        <div className="btn-group col4">
-                          <button
-                            className="btn update-btn"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                            style={{
-                              backgroundColor:
-                                bill.Status === "Paid"
-                                  ? "#d1e7dd"
-                                  : bill.Status === "Due"
-                                  ? "#f8d7da"
-                                  : "#fff3cd",
-                            }}
-                          >
-                            {bill.Status}{" "}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-caret-down-fill"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                            </svg>
-                            <br />
-                            {bill.Status === "Paid" && (
-                              <span>{styledDate(bill.datePaid)}</span>
-                            )}
-                          </button>
-                          <ul className="dropdown-menu">
-                            <li>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={() => {
-                                  setUpdateModal(true);
-                                  setStatusBody({
-                                    bill_id: bill.id,
-                                    status: "Due",
-                                    userId: auth.userId,
-                                  });
-                                }}
-                              >
-                                Due
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="btn btn-warning"
-                                onClick={() => {
-                                  setUpdateModal(true);
-                                  setStatusBody({
-                                    bill_id: bill.id,
-                                    status: "Processing",
-                                    userId: auth.userId,
-                                  });
-                                }}
-                              >
-                                Processing
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="btn btn-success"
-                                onClick={() => {
-                                  setUpdateModal(true);
-                                  setStatusBody({
-                                    bill_id: bill.id,
-                                    status: "Paid",
-                                    userId: auth.userId,
-                                    datePaid: new Date(),
-                                  });
-                                }}
-                              >
-                                Paid
-                              </button>
-                            </li>
-                          </ul>
-                        </div>
-                      )}
+                      <div className={`col4 ${bill.Status}`}>
+                        {bill.Status}
+                        <br />
+                        {bill.Status === "Paid" && (
+                          <span>{styledDate(bill.datePaid)}</span>
+                        )}
+                      </div>
+
                       <div className="col5">{bill.Note}</div>
                       <button
                         className="btn btn-outline-primary view-btn"
@@ -580,26 +491,6 @@ const History = () => {
                       >
                         view
                       </button>
-                      {auth.userId === process.env.REACT_APP_ADMIN_ID && (
-                        <button
-                          className="btn delete-btn"
-                          onClick={() => {
-                            setBillId(bill.id);
-                            setDeleteBill(true);
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            className="bi bi-trash-fill"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                          </svg>
-                        </button>
-                      )}
                     </div>
                   </React.Fragment>
                 ))}

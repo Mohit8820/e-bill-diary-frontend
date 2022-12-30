@@ -147,6 +147,9 @@ nav {
   background: var(--sec-color-02);
   text-align: center;
 }
+.login form .label {
+  min-width: 12rem;
+}
 .input input {
   padding: 2rem;
   background: none;
@@ -597,7 +600,9 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
 }
-
+.payment-form .label {
+  min-width: 13.3rem;
+}
 /***************generate*********************/
 .generate-form {
   display: flex;
@@ -605,6 +610,9 @@ input[type="file"] {
   align-items: center;
   justify-content: flex-start;
   gap: 2rem;
+}
+.generate-form .label {
+  min-width: 18rem;
 }
 /*****************admin*************/
 .users {

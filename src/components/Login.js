@@ -35,14 +35,11 @@ const Login = () => {
         JSON.stringify(user),
         { "Content-Type": "application/json" }
       );
-      console.log(responseData);
       auth.login(responseData.userId, responseData.token);
       if (responseData.userId === process.env.REACT_APP_ADMIN_ID)
         navigate("/adminHome");
       else navigate("/home", { state: responseData.userId });
     } catch (err) {
-      console.log(err);
-
       setUser({
         name: "",
         password: "",
@@ -877,7 +874,7 @@ const Login = () => {
               name="name"
               onChange={handleChange}
               value={user.name}
-              placeholder="name"
+              // placeholder="name"
               required={true}
             />
           </div>
@@ -889,7 +886,7 @@ const Login = () => {
               name="password"
               onChange={handleChange}
               value={user.password}
-              placeholder="Password"
+              // placeholder="Password"
               minLength="6"
               required={true}
             />

@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 import { AuthContext } from "../contexts/auth-context";
 import { styledDate, getDay, getMonth, getYear } from "../assets/styledDate";
@@ -54,9 +56,21 @@ const History = () => {
   // const sendToHome = async () => {
   //   navigate("/home", { state: user.id });
   // };
-  const print = async () => {
-    window.print();
-    // document.body.innerHTML = backup;
+  const print = () => {
+    const doc = new jsPDF({
+      format: "a4",
+      unit: "px",
+      format: [1000, 562],
+    });
+
+    // Adding the fonts.
+    doc.setFont("Inter-Regular", "normal");
+
+    doc.html(hist.current, {
+      callback(doc) {
+        doc.save("document");
+      },
+    });
   };
 
   const openBill = (index) => {
@@ -89,6 +103,31 @@ const History = () => {
       );
       navigate("/history", { state: responseData.user });
     } catch (err) {}
+  };
+
+  const hist = useRef(null);
+
+  const handleGeneratePdf = () => {
+    document.getElementById("bill-history").removeAttribute("hidden");
+    print();
+    setTimeout(function () {
+      document.getElementById("bill-history").setAttribute("hidden", "true");
+    }, 3000);
+  };
+
+  const styles = {
+    page: {
+      padding: "2rem 5rem",
+      "page-break-after": "always",
+      position: "absolute",
+      zIndex: -9999,
+    },
+    table: {
+      //
+    },
+    note: {
+      maxWidth: "7rem",
+    },
   };
 
   return (
@@ -444,65 +483,87 @@ const History = () => {
             ))}
         </div>
 
-        <div className="bill" style={{ display: "none" }}>
+        <div
+          className="bill-history"
+          id="bill-history"
+          ref={hist}
+          style={styles.page}
+          hidden
+        >
           <p className="lead" id="lead">
             Name : <strong>{user.name}</strong>
           </p>
-          <div className=" history-table">
-            <div>
-              <div id="bill" className="table-head">
-                <div className="col1">Bill Date</div>
-                <div className="col2">Reading</div>
-                <div className="col3">Amount</div>
-                <div className="col4">Status</div>
-                <div className="col5">Note</div>
-              </div>
-            </div>
-            <div className="table-body">
+          <table
+            className=" history-table"
+            border="1"
+            borderColor="black"
+            cellPadding="25"
+            cellSpacing="0"
+            align="center"
+          >
+            <tr>
+              <th className="col1" style={styles.table}>
+                Bill Date
+              </th>
+              <th className="col2" style={styles.table}>
+                Reading
+              </th>
+              <th className="col3" style={styles.table}>
+                Amount
+              </th>
+              <th className="col4" style={styles.table}>
+                Status
+              </th>
+              <th className="col5" style={styles.table}>
+                Note
+              </th>
+            </tr>
+            <tbody className="table-body">
               {user.history
                 .slice(0)
                 .reverse()
                 .map((bill, index) => (
                   <React.Fragment key={index}>
-                    <div
+                    <tr
                       className={`table-row ${
                         index % 2 === 0 ? "shaded-bg" : ""
                       }`}
                     >
-                      <div className="col1">
+                      <td className="col1" style={styles.table}>
                         {billDate[user.history.length - 1 - index]}
-                      </div>
-                      <div className="col2">{bill.Reading}</div>
-                      <div className="col3">{bill.Amount}</div>
-                      <div className={`col4 ${bill.Status}`}>
+                      </td>
+                      <td className="col2" style={styles.table}>
+                        {bill.Reading}
+                      </td>
+                      <td className="col3" style={styles.table}>
+                        {bill.Amount}
+                      </td>
+                      <td className={`col4`} style={styles.table}>
                         {bill.Status}
                         <br />
                         {bill.Status === "Paid" && (
                           <span>{styledDate(bill.datePaid)}</span>
                         )}
-                      </div>
+                      </td>
 
-                      <div className="col5">{bill.Note}</div>
-                      <button
-                        className="btn btn-outline-primary view-btn"
-                        onClick={() =>
-                          openBill(user.history.length - 1 - index)
-                        }
-                      >
-                        view
-                      </button>
-                    </div>
+                      <td className="col5" style={styles.note}>
+                        {bill.Note}
+                      </td>
+                    </tr>
                   </React.Fragment>
                 ))}
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
         <div className="btn-flex">
-          <style>{`@media print {.btn-flex{display: none;}}`}</style>
+          <style>{`@media print {.btn-flex,.bill-list{display: none;}
+          .bill{
+            display:block!important;
+          }}`}</style>
           {/* <button className="sec-btn" onClick={sendToHome}>
             Back
           </button> */}
-          <button className="primary-btn" onClick={print}>
+          <button className="primary-btn" onClick={handleGeneratePdf}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1.9rem"

@@ -699,17 +699,28 @@ input[type="file"] {
   right: 10%;
   opacity: 1;
 }
-
+.bill-history {
+  width: 100%;
+  color: #000;
+}
+.history-table {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  border-collapse: collapse;
+}
 @media print {
   .btn-flex,
   .view-btn,
   .delete-btn,
-  nav {
+  nav,
+  h2 {
     display: none;
   }
-  .history-table {
-    height: auto;
+  .bill-history {
+    display: block;
   }
+
   .table-head,
   .table-row {
     width: 34rem;

@@ -51,7 +51,7 @@ const Generate = () => {
       <div className="generate">
         <h2>Generate</h2>
         <figcaption className="info">
-          Some Instructions<cite title="Source Title"> Detailed Steps </cite>
+          Enter current meter reading
         </figcaption>
         <form onSubmit={(event) => showBill(event)} className="generate-form">
           {isLoading && <LoadingSpinner asOverlay />}
